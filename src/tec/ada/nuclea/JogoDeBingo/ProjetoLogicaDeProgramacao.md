@@ -1,4 +1,5 @@
-# Ada-Nuclea
+# Ada-Núclea
+## Lógica de Programação I
 Ser + Tech Programa 50+
 # Bingo Game
 
