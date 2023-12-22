@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Filme {
-    private String nome;
+    private final String nome;
     private LocalDate dataLancamento;
     private int orcamento;
     private String descircao;
@@ -23,7 +23,6 @@ public class Filme {
     }
 
     public void adicionarAtor(Ator ator) {
-        // Verificar se o ator já está no elenco para evitar duplicatas
         if (this.elenco == null) {
             this.elenco = new Ator[]{ator};
         } else {
@@ -35,8 +34,8 @@ public class Filme {
         }
     }
 
-    public static Filme valueOf(String filmeString) {
-        return new Filme(filmeString);
+    public void adicionarDiretor(Diretor diretor) {
+        this.diretor = diretor;
     }
 
     public String getNome() {
@@ -57,9 +56,5 @@ public class Filme {
     }
     public Ator[] getElenco() {
         return this.elenco;
-    }
-
-    public boolean contains(String nomeFilme) {
-        return true;
     }
 }

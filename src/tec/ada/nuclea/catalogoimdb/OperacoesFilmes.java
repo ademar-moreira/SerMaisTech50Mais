@@ -1,8 +1,8 @@
 package tec.ada.nuclea.catalogoimdb;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class OperacoesFilmes {
     private ArrayList<Filme> filmesDoBancoDeDados;
@@ -29,50 +29,58 @@ public class OperacoesFilmes {
     }
 
     public void associarAtorAoFilme(String nomeFilme, String nomeAtor) {
-        //boolean filmeEncontrado = false;
+        Optional<Filme> filmeEncontrado = filmesDoBancoDeDados.stream()
+                .filter(filme -> Normalizer.normalize(filme.getNome(), Normalizer.Form.NFD)
+                        .replaceAll("[^\\p{ASCII}]", "")
+                        .equalsIgnoreCase(Normalizer.normalize(nomeFilme, Normalizer.Form.NFD)
+                                .replaceAll("[^\\p{ASCII}]", "")))
+                .findAny();
 
-         String isFilme = String.valueOf(filmesDoBancoDeDados.stream().filter(nome -> {
-            return nome.contains(nomeFilme);
-        }).findAny().orElse(null));
+        if (filmeEncontrado.isPresent()) {
+            Optional<Ator> atorEncontrado = atoresDoBandoDeDados.stream()
+                    .filter(ator -> Normalizer.normalize(ator.getNome(), Normalizer.Form.NFD)
+                            .replaceAll("[^\\p{ASCII}]", "")
+                            .equalsIgnoreCase(Normalizer.normalize(nomeAtor, Normalizer.Form.NFD)
+                                    .replaceAll("[^\\p{ASCII}]", "")))
+                    .findAny();
 
-         if(isFilme != null) {
-             filmesDoBancoDeDados.stream().filter(nome -> {
-                 return nome.contains(nomeFilme);
-             }).findAny().ifPresent(filmeAchado -> filmeAchado.adicionarAtor(Ator.valueOf(nomeAtor)));
+            if (atorEncontrado.isPresent()) {
+                filmeEncontrado.get().adicionarAtor(atorEncontrado.get());
 
-             System.out.println("Ator associado ao filme com sucesso!");
+                atorEncontrado.get().adicionarFilme(filmeEncontrado.get());
 
-         } else {
-             System.out.println("Filme não encontrado!");
-         }
-
-
-        /*for (Filme film : filmesDoBancoDeDados) {
-            if (film.getNome().equalsIgnoreCase(nomeFilme)) {
-                film.adicionarAtor(Ator.valueOf(nomeAtor));
                 System.out.println("Ator associado ao filme com sucesso!");
-                filmeEncontrado = true;
-                break;
+            } else {
+                System.out.println("Ator não encontrado!");
             }
-        }*/
-       /* if (!filmeEncontrado) {
+        } else {
             System.out.println("Filme não encontrado!");
-        }*/
-
-        /*boolean isCadastrao = false;
-        for (Filme film : this.filmesDoBancoDeDados) {
-            if (film.getNome().equalsIgnoreCase(String.valueOf(nome))) {
-                filmesDoBancoDeDados.add(elenco);
-                System.out.println("Elenco vinculado com sucesso!");
-                isCadastrao = true;
-                break;
-            }
         }
-        if (!isCadastrao) {
-            System.out.println("Filme não encontrado!");
-        }*/
     }
 
+    public void associarDiretorAoFilme(String nomeFilme, String nomeDiretor) {
+        Optional<Filme> filmeEncontrado = filmesDoBancoDeDados.stream()
+                .filter(filme -> filme.getNome().equalsIgnoreCase(nomeFilme))
+                .findAny();
+
+        if (filmeEncontrado.isPresent()) {
+            Optional<Diretor> diretorEncontrado = diretoresDoBancoDeDados.stream()
+                    .filter(diretor -> diretor.getNome().equalsIgnoreCase(nomeDiretor))
+                    .findAny();
+
+            if (diretorEncontrado.isPresent()) {
+                filmeEncontrado.get().adicionarDiretor(diretorEncontrado.get());
+
+                diretorEncontrado.get().adicionarFilme(filmeEncontrado.get());
+
+                System.out.println("Diretor associado ao filme com sucesso!");
+            } else {
+                System.out.println("Diretor não encontrado!");
+            }
+        } else {
+            System.out.println("Filme não encontrado!");
+        }
+    }
     public Filme pesquisarFilmePorNome(String nome) {
         for (Filme filme : filmesDoBancoDeDados) {
             if (filme.getNome().equalsIgnoreCase(nome)) {
@@ -83,7 +91,7 @@ public class OperacoesFilmes {
         return null;
     }
 
-    public void excluirFime(String nome){
+    public void excluirFilme(String nome){
         for (Filme film : this.filmesDoBancoDeDados) {
             if (film.getNome().equalsIgnoreCase(nome)) {
                 System.out.println("Removendo o fime " + nome);
@@ -130,7 +138,6 @@ public class OperacoesFilmes {
         for (Diretor director : this.diretoresDoBancoDeDados) {
             if (director.getNome().equalsIgnoreCase(nome)) {
                 System.out.println("Removendo o diretor " + nome);
-
             }
         }
     }

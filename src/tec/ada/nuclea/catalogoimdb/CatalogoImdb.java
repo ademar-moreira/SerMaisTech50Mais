@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
+import java.util.List;
 import java.util.Scanner;
 
 public class CatalogoImdb {
@@ -20,14 +20,18 @@ public class CatalogoImdb {
                     2 - Cadastrar atores
                     3 - Cadastrar diretores
                     4 - Associar um filme aos seus atores
-                    5 - Associar um filme aos seus diretores
+                    5 - Associar um filme ao seu diretor
                     6 - Pesquisar filme cadastrados pelo nome
                     7 - Sair
                     Digite uma opção:""");
-            int opcao = sc.nextInt();
+            String input = sc.next();
             sc.nextLine();
-
+            int opcao;
             try {
+                opcao = Integer.parseInt(input);
+                if (opcao < 1 || opcao > 7) {
+                    System.err.println("Entrada inválida! - Digite um número entre 1 e 7.");
+                }
                 if (opcao == 1) {
                     System.out.println("Cadastrar Filmes");
                     String continuar = "S";
@@ -52,9 +56,19 @@ public class CatalogoImdb {
                             }
                         }
 
-                        System.out.println("Digite o valor do orçamento do filme: ");
-                        int orcamento = sc.nextInt();
-                        sc.nextLine();
+                        int orcamento = 0;
+                        boolean orcamentoValido = false;
+                        while (!orcamentoValido){
+                            System.out.println("Digite o valor do orçamento do filme: ");
+                            input = sc.nextLine();
+
+                            try {
+                                orcamento = Integer.parseInt(input);
+                                orcamentoValido = true;
+                            }catch (NumberFormatException e) {
+                                System.err.println("Entrada inválida! - Digite um número inteiro");
+                            }
+                        }
 
                         System.out.println("Digite a descrição do filme: ");
                         String descricao = sc.nextLine();
@@ -122,7 +136,6 @@ public class CatalogoImdb {
                         System.out.print(actor.getNome() + "   " + actor.getDataNascimento() + "   "
                                 + actor.getNacionalidade() + "\n");
                     }
-
                 }
 
                 if (opcao == 3) {
@@ -169,7 +182,6 @@ public class CatalogoImdb {
                         System.out.print(director.getNome() + "   " + director.getDataNascimento() + "   "
                                 + director.getNacionalidade() + "\n");
                     }
-
                 }
 
                 if (opcao == 4) {
@@ -178,28 +190,17 @@ public class CatalogoImdb {
 
                     while (continuar.equalsIgnoreCase("S")) {
 
-                        System.out.println("Digite o nome do filme para associar os atores");
+                        System.out.println("Digite o nome do filme para associar aos atores");
                         String filmeString = sc.nextLine();
-                        //Filme filme = Filme.valueOf(filmeString);
                         String cont = "S";
                         while (cont.equalsIgnoreCase("S")) {
 
                             System.out.println("Digite o nome do ator para vincular ao filme");
                             String nomeAtorString = sc.nextLine();
-                            //Ator nomeAtor = Ator.valueOf(nomeAtorString);
 
-                            /*// Criar instância de Ator
-                            Ator ator = new Ator(nomeAtor, null, null);*/
-
-                            // Associar ator ao filme
                             operacoesFilmes.associarAtorAoFilme(filmeString, nomeAtorString);
 
-                            /*System.out.println("Digite o nome do ator para vincular ao filme " + filme);
-                            String atorString = sc.nextLine();
-                            Filme ator = Ator.valueof(atorString);
-                            operacoesFilmes.associarAtorAoFilme(filme, ator);*/
-
-                            System.out.println("Deseja vincular outro ator ao filme?");
+                            System.out.printf("Deseja vincular outro ator ao filme %s?\n", filmeString);
                             cont = sc.nextLine();
                             while (!cont.equalsIgnoreCase("S") && !cont.equalsIgnoreCase("N")) {
                                 System.err.println("Entrada inválida! - Digite apenas S ou N");
@@ -224,16 +225,23 @@ public class CatalogoImdb {
                 }
 
                 if (opcao == 5) {
-                    System.out.println("Associar um filme com seu diretor");
+                    System.out.println("Associar um filme ao seu diretor");
                     String continuar = "S";
 
                     while (continuar.equalsIgnoreCase("S")) {
 
-                        System.out.println("Deseja Cadastrar outro diretor? ");
+                        System.out.println("Digite o nome do filme para associar ao diretor");
+                        String filmeString = sc.nextLine();
+                        System.out.println("Digite o nome do diretor para vincular ao filme");
+                        String nomeDiretorString = sc.nextLine();
+
+                        operacoesFilmes.associarDiretorAoFilme(filmeString, nomeDiretorString);
+
+                        System.out.println("Deseja associar outro filme com seu diretor? ");
                         continuar = sc.nextLine();
                         while (!continuar.equalsIgnoreCase("S") && !continuar.equalsIgnoreCase("N")) {
                             System.err.println("Entrada inválida! - Digite apenas S ou N");
-                            System.out.println("Deseja Cadastrar outro diretor? ");
+                            System.out.println("Deseja associar outro filme com seu diretor? ");
                             continuar = sc.nextLine();
                         }
                     }
@@ -256,6 +264,10 @@ public class CatalogoImdb {
                             System.out.println("Data de Lançamento: " + filmeEncontrado.getDataLancamento());
                             System.out.println("Orçamento: " + filmeEncontrado.getOrcamento());
                             System.out.println("Descrição: " + filmeEncontrado.getDescricao());
+                            System.out.println("Diretor: " + filmeEncontrado.getDiretor().getNome());
+                            System.out.println("Elenco: ");
+                            List<Ator> atores = Arrays.asList(filmeEncontrado.getElenco());
+                            atores.forEach(ator -> System.out.println("        "+ ator.getNome()));
                         }
 
                         System.out.println("Deseja pesquisar outro filme? ");
@@ -274,7 +286,7 @@ public class CatalogoImdb {
                 }
 
             }catch (NumberFormatException e) {
-                System.err.println("Entrada inválida! - Digite um número inteiro de 1 a 6.");
+                System.err.println("Entrada inválida! - Digite um número inteiro de 1 a 7.");
 
             }
         }

@@ -1,19 +1,35 @@
 package tec.ada.nuclea.catalogoimdb;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class Ator extends ProfissionalCinema {
+    private Filme[] filmes;
 
     public Ator(String nome, LocalDate dataNascimento, String nacionalidade) {
         super(nome, dataNascimento, nacionalidade);
+    }
+
+    public Filme[] getFilmes() {
+        return filmes;
     }
 
     public Ator(String nome) {
         super(nome);
     }
 
-    public static Ator valueOf(String nomeAtorString) {
-        return new Ator(nomeAtorString);
+    public void adicionarFilme(Filme filme) {
+        if (this.filmes == null) {
+            this.filmes = new Filme[]{filme};
+        } else {
+            ArrayList<Filme> novoFilmes = new ArrayList<>(Arrays.asList(this.getFilmes()));
+            if (!novoFilmes.contains(filme)) {
+                novoFilmes.add(filme);
+                this.filmes = novoFilmes.toArray(new Filme[0]);
+            }
+        }
     }
 
 }

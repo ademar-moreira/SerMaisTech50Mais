@@ -6,7 +6,7 @@ public class ProfissionalCinema {
     private String nome;
     private LocalDate dataNascimento;
     private String nacionalidade;
-    private Filme[] filmes;
+    //private Filme[] filmes;
 
     public ProfissionalCinema(String nome, LocalDate dataNascimento, String nacionalidade) {
         this.nome = nome;
@@ -40,13 +40,5 @@ public class ProfissionalCinema {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
-    }
-
-    public Filme[] getFilmes() {
-        return filmes;
-    }
-
-    public void setFilmes(Filme[] filmes) {
-        this.filmes = filmes;
     }
 }
