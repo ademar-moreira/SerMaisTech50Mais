@@ -1,23 +1,42 @@
 package tec.ada.nuclea.catalogoimdb;
-import java.time.LocalDate;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class testes {
     public static void main(String[] args) {
-        // Obtendo a data atual
-        LocalDate hoje = LocalDate.now();
-        System.out.println("Data atual: " + hoje);
+        JFrame frame = new JFrame("Exemplo de Menu");
+        JMenuBar menuBar = new JMenuBar();
 
-        // Criando uma data específica
-        LocalDate dataEspecifica = LocalDate.of(2023, 12, 8);
-        System.out.println("Data específica: " + dataEspecifica);
+        JMenu fileMenu = new JMenu("Arquivo");
+        JMenuItem openItem = new JMenuItem("Abrir");
+        JMenuItem saveItem = new JMenuItem("Salvar");
+        JMenuItem exitItem = new JMenuItem("Sair");
 
-        // Manipulando datas
-        LocalDate amanha = hoje.plusDays(1);
-        System.out.println("Amanhã será: " + amanha);
+        exitItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
-        // Verificando diferença entre datas
-        long diferencaEmDias = dataEspecifica.until(hoje).getDays();
-        System.out.println("Diferença em dias: " + diferencaEmDias);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
+
+        JMenu helpMenu = new JMenu("Ajuda");
+        JMenuItem aboutItem = new JMenuItem("Sobre");
+
+        helpMenu.add(aboutItem);
+
+        menuBar.add(fileMenu);
+        menuBar.add(helpMenu);
+
+        frame.setJMenuBar(menuBar);
+
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }
-

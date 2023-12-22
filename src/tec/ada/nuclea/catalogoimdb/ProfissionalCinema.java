@@ -8,11 +8,14 @@ public class ProfissionalCinema {
     private String nacionalidade;
     private Filme[] filmes;
 
-    public ProfissionalCinema(String nome, LocalDate dataNascimento, String nacionalidade, Filme[] filmes) {
+    public ProfissionalCinema(String nome, LocalDate dataNascimento, String nacionalidade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.nacionalidade = nacionalidade;
-        this.filmes = filmes;
+    }
+
+    public ProfissionalCinema(String nome) {
+        this.nome = nome;
     }
 
     public String getNome() {
