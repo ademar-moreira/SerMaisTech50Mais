@@ -1,4 +1,4 @@
-package tec.ada.nuclea.catalogoimdb;
+package tec.ada.nuclea.poo.catalogoimdb;
 
 import java.time.LocalDate;
 

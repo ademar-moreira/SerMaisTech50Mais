@@ -1,4 +1,4 @@
-package tec.ada.nuclea.JogoDeBingo;
+package tec.ada.nuclea.logicaProgramacao.JogoDeBingo;
 
 import java.util.*;
 import java.lang.Integer;

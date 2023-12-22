@@ -1,4 +1,4 @@
-package tec.ada.nuclea.catalogoimdb;
+package tec.ada.nuclea.poo.catalogoimdb;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
