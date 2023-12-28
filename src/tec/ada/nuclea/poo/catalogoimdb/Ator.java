@@ -3,7 +3,6 @@ package tec.ada.nuclea.poo.catalogoimdb;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 
 public class Ator extends ProfissionalCinema {
     private Filme[] filmes;
