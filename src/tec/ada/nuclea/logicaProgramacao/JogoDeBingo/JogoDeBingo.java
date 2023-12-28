@@ -344,7 +344,7 @@ public class JogoDeBingo {
         return arrayPontuacao;
     }
 
-    public static Pair[] ordenarPontuacao(int[] arrayPontuacao) {
+    private static Pair[] ordenarPontuacao(int[] arrayPontuacao) {
 
         Pair[] pares = new Pair[arrayPontuacao.length];
 
