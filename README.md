@@ -23,3 +23,13 @@ Objetos I
 → Programação Web I
 
 → Programação Web II
+
+→ Currículo e Linkedin
+
+→ Github como portfólio
+
+→ Entrevistas e Softskills
+
+→ Entrevista RH
+
+→ Entrevistas Técnicas
