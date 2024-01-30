@@ -8,4 +8,4 @@ Como parte do desafio final deste curso, você aplicará os conhecimentos adquir
 3. Use o Git: Gerencie o desenvolvimento do seu projeto com os comandos Git aprendidos, fazendo commits regulares para acompanhar o progresso.
 4. Publique no GitHub: Ao concluir o projeto, publique-o em um repositório no GitHub, demonstrando suas habilidades de desenvolvimento e uso do Git.
 
-Este desafio não apenas consolida sua aprendizagem, mas também resulta em um projeto tangível que você pode incluir em seu portfólio, mostrando suas habilidades práticas a futuros empregadores
+Este desafio não apenas consolida sua aprendizagem, mas também resulta em um projeto tangível que você pode incluir em seu portfólio, mostrando suas habilidades práticas a futuros empregadores.
