@@ -1,7 +1,7 @@
-##Desafio Final: Criação de uma Calculadora
+## Desafio Final: Criação de uma Calculadora
 Como parte do desafio final deste curso, você aplicará os conhecimentos adquiridos para criar um projeto prático: uma calculadora com as quatro operações matemáticas básicas (adição, subtração, multiplicação e divisão). Este projeto deve ser desenvolvido utilizando a linguagem de programação de sua escolha, demonstrando sua capacidade de aplicar lógica de programação e usar o Git para gerenciamento de versões.
 
-###Orientações para o Desafio:
+### Orientações para o Desafio:
 
 1. Escolha a Linguagem: Utilize a linguagem de programação com a qual você se sente mais confortável.
 2. Implemente as Operações: Certifique-se de que a calculadora pode realizar adição, subtração, multiplicação e divisão.
